@@ -1,0 +1,50 @@
+-- SQL script for COVID-19 Contact Tracing and Patient Data Analysis
+
+-- Description: Conducted contact tracing and analyzed patient data related to COVID-19 for Professional Research Consultants, Inc. (PRC).
+
+-- Create a table to store patient data
+CREATE TABLE PatientData (
+    PatientID INT PRIMARY KEY,
+    PatientName VARCHAR(255),
+    Age INT,
+    Gender VARCHAR(10),
+    DiagnosisDate DATE,
+    ContactTraced BOOLEAN,
+    ContactPersonName VARCHAR(255),
+    ContactDate DATE
+);
+
+-- Insert patient data
+INSERT INTO PatientData (PatientID, PatientName, Age, Gender, DiagnosisDate, ContactTraced, ContactPersonName, ContactDate)
+VALUES
+    (1, 'John Doe', 35, 'Male', '2023-01-15', TRUE, 'Jane Smith', '2023-01-16'),
+    (2, 'Jane Smith', 28, 'Female', '2023-01-17', TRUE, 'Michael Johnson', '2023-01-18'),
+    (3, 'Michael Johnson', 42, 'Male', '2023-01-19', FALSE, NULL, NULL),
+    (4, 'Emily Davis', 55, 'Female', '2023-01-20', TRUE, 'John Doe', '2023-01-21'),
+    (5, 'Sarah Wilson', 30, 'Female', '2023-01-22', TRUE, 'Emily Davis', '2023-01-23');
+
+-- Create a table to store analysis results
+CREATE TABLE PatientAnalysis (
+    AnalysisID INT PRIMARY KEY,
+    PatientID INT,
+    ContactedPersonName VARCHAR(255),
+    ContactedPersonAge INT,
+    ContactedPersonGender VARCHAR(10),
+    DaysSinceContact INT,
+    Result VARCHAR(50)
+);
+
+-- Insert analysis results
+INSERT INTO PatientAnalysis (AnalysisID, PatientID, ContactedPersonName, ContactedPersonAge, ContactedPersonGender, DaysSinceContact, Result)
+VALUES
+    (1, 1, 'Jane Smith', 28, 'Female', 1, 'Low Risk'),
+    (2, 2, 'Michael Johnson', 42, 'Male', 1, 'Low Risk'),
+    (3, 4, 'John Doe', 35, 'Male', 1, 'Low Risk'),
+    (4, 5, 'Emily Davis', 55, 'Female', 1, 'Low Risk'),
+    (5, 1, 'Jane Smith', 28, 'Female', 2, 'Medium Risk');
+
+-- Display patient data
+SELECT * FROM PatientData;
+
+-- Display analysis results
+SELECT * FROM PatientAnalysis;
